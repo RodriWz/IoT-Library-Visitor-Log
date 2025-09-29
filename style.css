@@ -1,0 +1,169 @@
+/* Pengaturan Dasar */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Wadah Utama Login */
+.login-container {
+    display: flex;
+    width: 1250px;
+    height: 640px;
+    background-color: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Bagian Kiri (Wadah Gambar) */
+.login-image {
+    width: 50%;
+    position: relative;
+    overflow: hidden; /* Sembunyikan gambar yang berada di luar area */
+}
+
+/* === MODIFIKASI UNTUK SLIDESHOW === */
+.slideshow-container {
+    width: 400%; /* Karena ada 4 gambar, jadi 4 x 100% */
+    height: 100%;
+    display: flex;
+    /* Animasi: 'slide' adalah nama, 20s durasi, 'infinite' untuk terus berulang */
+    animation: slide 20s infinite;
+}
+
+.slide {
+    width: 25%; /* Setiap slide memakan 1/4 dari lebar container */
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Keyframes mendefinisikan alur animasi */
+@keyframes slide {
+    0% { transform: translateX(0%); }      /* Gambar 1 */
+    20% { transform: translateX(0%); }     /* Tahan di Gambar 1 */
+    25% { transform: translateX(-25%); }   /* Pindah ke Gambar 2 */
+    45% { transform: translateX(-25%); }   /* Tahan di Gambar 2 */
+    50% { transform: translateX(-50%); }   /* Pindah ke Gambar 3 */
+    70% { transform: translateX(-50%); }   /* Tahan di Gambar 3 */
+    75% { transform: translateX(-75%); }   /* Pindah ke Gambar 4 */
+    95% { transform: translateX(-75%); }   /* Tahan di Gambar 4 */
+    100% { transform: translateX(0%); }    /* Kembali ke awal untuk loop */
+}
+/* === AKHIR MODIFIKASI === */
+
+/* Bagian Kanan (Formulir) */
+.login-form {
+    width: 50%;
+    padding: 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Header Formulir */
+.form-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+    margin-right: 15px;
+}
+
+.header-text h1, .header-text h2 {
+    margin: 0;
+    color: #D32F2F;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.header-text h1 {
+    font-size: 14px;
+}
+
+.header-text h2 {
+    font-size: 16px;
+}
+
+/* Grup Input */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.input-group input::placeholder {
+    color: #aaa;
+}
+
+/* Tombol Login */
+.login-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #D32F2F;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #B71C1C;
+}
+
+/* Link di Bawah Tombol */
+.form-links {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.form-links a {
+    color: #D32F2F;
+    text-decoration: none;
+    font-size: 13px;
+    margin-left: 20px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.form-links a:hover {
+    text-decoration: underline;
+}
+
+
+/* Teks Footer */
+.footer-text {
+    margin-top: auto;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+}
