@@ -23,7 +23,7 @@
     </div>
     <nav class="sidebar-nav">
       <ul>
-        <li><a href="#"><i class="fas fa-tachometer-alt fa-fw"></i> Dashboard</a></li>
+        <li><a href="dashboard"><i class="fas fa-tachometer-alt fa-fw"></i> Dashboard</a></li>
         <li><a href="#" class="active"><i class="fas fa-edit fa-fw"></i> Form Pengunjung</a></li>
         <li><a href="#"><i class="fas fa-users fa-fw"></i> Daftar Pengunjung</a></li>
         <li><a href="#"><i class="fas fa-chart-bar fa-fw"></i> Laporan Pengunjung</a></li>
