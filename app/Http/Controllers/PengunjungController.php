@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pengunjung;
 use Illuminate\Http\Request;
+use App\Models\Pengunjung;
 
 class PengunjungController extends Controller
 {
     public function index()
     {
-        return view('pengunjung');
+        return view('pengunjung.form');
     }
 
     public function store(Request $request)
@@ -23,6 +23,6 @@ class PengunjungController extends Controller
 
         Pengunjung::create($request->all());
 
-        return redirect()->back()->with('success', 'Data pengunjung berhasil disimpan!');
+        return redirect('/pengunjung')->with('success', 'Data pengunjung berhasil disimpan!');
     }
 }
