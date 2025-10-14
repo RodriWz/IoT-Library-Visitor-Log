@@ -1,0 +1,138 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 230px;
+    background-color: #e60000;
+    color: white;
+    height: 100vh;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.sidebar h2 {
+    font-size: 16px;
+    line-height: 22px;
+    margin-bottom: 40px;
+}
+
+.menu-item {
+    display: block;
+    margin: 15px 0;
+    padding: 10px 15px;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.menu-item:hover,
+.menu-item.active {
+    background-color: #c10000;
+}
+
+.bottom-menu {
+    position: absolute;
+    bottom: 40px;
+    left: 20px;
+}
+
+/* Konten utama */
+.content {
+    flex: 1;
+    padding: 40px 60px;
+}
+
+.content h1 {
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.content small {
+    color: #666;
+}
+
+.form-container {
+    background-color: #e6e6e6;
+    padding: 30px 40px;
+    margin-top: 30px;
+    border-radius: 12px;
+    box-shadow: 5px 5px 10px #ccc;
+    width: 800px;
+}
+
+.add-icon {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    background-color: #e60000;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    width: 120px;
+    text-align: center;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.form-group input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    background-color: white;
+}
+
+.submit-btn {
+    display: block;
+    margin: 30px auto 0;
+    background-color: #e60000;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 50px;
+    font-weight: bold;
+    box-shadow: 3px 3px 6px #999;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #c10000;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .form-container {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .form-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .form-group label {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
