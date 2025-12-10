@@ -189,6 +189,7 @@ body {
     box-shadow: none;
 }
 
+/* ===== SUCCESS ALERT ===== */
 .alert-success {
     position: fixed;
     top: 20px;
@@ -290,9 +291,6 @@ body {
 
 /* ===== RESPONSIVE DESIGN ===== */
 
-/* ===== RESPONSIVE DESIGN FOR ALERT ===== */
-
-/* Tablets (768px and below) */
 @media (max-width: 768px) {
     .alert-success {
         top: 15px;
@@ -326,7 +324,6 @@ body {
     }
 }
 
-/* Small Screens (600px and below) */
 @media (max-width: 600px) {
     .alert-success {
         top: 10px;
@@ -352,7 +349,6 @@ body {
     }
 }
 
-/* Extra Small Screens (480px and below) */
 @media (max-width: 480px) {
     .alert-success {
         padding: 10px 14px;

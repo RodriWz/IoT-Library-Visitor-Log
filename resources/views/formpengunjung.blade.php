@@ -21,7 +21,8 @@
 
     <div class="form-container">
         <div class="add-icon">
-            <img src="{{ asset('icon/user.png') }}" alt="User Icon" class="add-icon-img">Tambah data baru
+            <img src="{{ asset('icon/user.png') }}" alt="User Icon" class="add-icon-img">
+            Tambah data baru
         </div>
 
         <form action="{{ route('pengunjung.store') }}" method="POST">
