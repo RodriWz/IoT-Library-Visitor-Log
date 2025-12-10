@@ -1,0 +1,317 @@
+/* CSS utama - jangan dihapus */
+#pengaturanBackdrop,
+#pengaturanModal {
+    display: none;
+}
+
+#pengaturanBackdrop.active,
+#pengaturanModal.active {
+    display: block !important;
+}
+
+/* Backdrop */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-backdrop.active {
+    opacity: 1;
+}
+
+/* Modal box - Gradient Merah Maroon */
+.modal-box {
+    position: fixed;
+    width: 700px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: linear-gradient(135deg, #8B1538 0%, #5C0A1F 100%); /* Gradient merah maroon */
+    padding: 0;
+    border-radius: 15px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    z-index: 1001;
+    opacity: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 20px 50px rgba(139, 21, 56, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.modal-box.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Header - Maroon dengan overlay putih transparan */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 35px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    border-radius: 15px 15px 0 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.modal-close {
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 26px;
+    cursor: pointer;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.3s;
+}
+
+.modal-close:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: rotate(90deg);
+}
+
+/* Body */
+.modal-body {
+    padding: 30px 35px;
+    background: transparent;
+}
+
+/* Tab Navigation */
+.modal-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 8px;
+}
+
+.modal-tab {
+    flex: 1;
+    padding: 12px 20px;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.modal-tab span {
+    font-size: 18px;
+}
+
+.modal-tab:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+.modal-tab.active {
+    background: white;
+    color: #8B1538;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Tab Content - PENTING! */
+.tab-content {
+    display: none !important;
+}
+
+.tab-content.active {
+    display: block !important;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hapus margin pada section di dalam tab */
+.tab-content > div {
+    margin-bottom: 0 !important;
+}
+
+/* Setiap section card - Putih bersih */
+.modal-body > div {
+    margin-bottom: 25px;
+    padding: 25px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(139, 21, 56, 0.1);
+    transition: transform 0.3s;
+}
+
+.modal-body > div:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* Judul section - Merah Maroon */
+.modal-body > div h3 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #8B1538;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #8B1538;
+}
+
+/* Input fields */
+.modal-body input,
+.modal-body select,
+.modal-body textarea {
+    background: white;
+    border: 2px solid #E5E5E5;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 15px;
+    color: #333333;
+    width: 100%;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+}
+
+.modal-body input::placeholder {
+    color: #999999;
+}
+
+.modal-body input:focus,
+.modal-body select:focus,
+.modal-body textarea:focus {
+    outline: none;
+    border-color: #8B1538;
+    box-shadow: 0 0 0 3px rgba(139, 21, 56, 0.1);
+}
+
+/* Tombol - Gradient Merah Maroon */
+.modal-body button {
+    background: linear-gradient(135deg, #8B1538 0%, #5C0A1F 100%);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+    margin-top: 10px;
+    letter-spacing: 0.5px;
+}
+
+.modal-body button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px rgba(139, 21, 56, 0.5);
+    background: linear-gradient(135deg, #A01845 0%, #6E0C25 100%);
+}
+
+/* Label */
+.modal-body label {
+    display: block;
+    margin-bottom: 8px;
+    color: #4A4A4A;
+    font-weight: 500;
+}
+
+/* Text dan paragraf */
+.modal-body p {
+    color: #666666;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Garis pemisah */
+hr {
+    border: none;
+    border-top: 1px solid #E5E5E5;
+    margin: 25px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .modal-box {
+        width: 90%;
+        max-height: 90vh;
+    }
+    
+    .modal-header {
+        padding: 20px 25px;
+    }
+    
+    .modal-body {
+        padding: 20px 25px;
+    }
+    
+    .modal-body > div {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-box {
+        width: 95%;
+        max-height: 95vh;
+    }
+    
+    .modal-body > div {
+        padding: 16px;
+    }
+    
+    .modal-body button {
+        padding: 12px 20px;
+    }
+}
+
+/* Scrollbar - Merah Maroon */
+.modal-box::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-box::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+}
+
+.modal-box::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #8B1538, #5C0A1F);
+    border-radius: 4px;
+}
+
+.modal-box::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #A01845, #6E0C25);
+}

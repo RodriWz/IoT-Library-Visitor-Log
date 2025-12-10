@@ -1,91 +1,151 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Library</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    
-    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
-</head>
-<body>
+@extends('layout.app')
 
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <h2>Library Medical Faculty of Hasanuddin University</h2>
+@section('title', 'Dashboard Perpustakaan')
+@section('header-title', 'Dashboard')
+@section('header-subtitle', 'Selamat datang di dashboard perpustakaan')
+
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}?v=1.0">
+@endpush
+
+@section('content')
+<div class="dashboard-container">
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Pengunjung harian</h3>
+            <div class="number">5,000</div>
+            <div class="description">pengunjung dalam seminggu</div>
         </div>
-        <nav class="sidebar-nav">
-            <ul>
-                <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                <li><a href="pengunjung"><i class="fas fa-edit"></i> Form Pengunjung</a></li>
-                <li><a href="#"><i class="fas fa-users"></i> Daftar Pengunjung</a></li>
-                <li><a href="#"><i class="fas fa-chart-bar"></i> Laporan Pengunjung</a></li>
-            </ul>
-        </nav>
-        <div class="sidebar-footer">
-             <ul>
-                <li><a href="#"><i class="fas fa-cog"></i> Pengaturan</a></li>
-                <li><a href="#"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
-            </ul>
+        
+        <div class="stat-card">
+            <h3>Pengunjung bulanan</h3>
+            <div class="number">15,000</div>
+            <div class="description">pengunjung</div>
         </div>
-    </aside>
-
-    <main class="main-content">
-        <header class="header">
-            <h1>Dashboard</h1>
-            <p>welcome back, student</p>
-        </header>
-
-        <section class="charts-grid">
-            <div class="chart-card" id="daily-chart-card">
-                <div class="chart-card-header">
-                    <div>
-                        <h4>Pengunjung harian</h4>
-                        <p>5.000 pengunjung dalam seminggu</p>
-                    </div>
-                    <div class="icon"><i class="fas fa-chart-line"></i></div>
-                </div>
-                <canvas id="dailyVisitorsChart"></canvas>
-            </div>
-
-            <div class="chart-card" id="monthly-chart-card">
-                 <div class="chart-card-header">
-                    <div>
-                        <h4>Pengunjung bulanan</h4>
-                        <p>15.000 pengunjung</p>
-                    </div>
-                     <div class="icon"><i class="fas fa-chart-line"></i></div>
-                </div>
-                <canvas id="monthlyVisitorsChart"></canvas>
-            </div>
-
-            <div class="chart-card" id="yearly-chart-card">
-                 <div class="chart-card-header">
-                    <div>
-                        <h4>Pengunjung 5 tahun terakhir</h4>
-                        <p>40.000 pengunjung</p>
-                    </div>
-                    <div class="icon"><i class="fas fa-chart-line"></i></div>
-                </div>
-                <canvas id="yearlyVisitorsChart"></canvas>
-            </div>
-        </section>
-    </main>
-    
-    <div id="dashboard-data" 
-         data-daily='{{ json_encode($dailyVisitors) }}' 
-         data-monthly='{{ json_encode($monthlyVisitors) }}'
-         data-yearly='{{ json_encode($yearlyVisitors) }}'
-         style="display: none;">
+        
+        <div class="stat-card">
+            <h3>Pengunjung 5 tahun terakhir</h3>
+            <div class="number">40,000</div>
+            <div class="description">pengunjung</div>
+        </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="{{ asset('js/dashboard.js') }}"></script>
+    <!-- Chart Section -->
+    <div class="chart-section">
+        <div class="chart-container">
+            <div class="chart-header">
+                <h2>Statistik Pengunjung</h2>
+                <p>Grafik perkembangan pengunjung perpustakaan</p>
+            </div>
+            <canvas id="visitorChart"></canvas>
+        </div>
 
-</body>
-</html>
+        <div class="mini-stats">
+            <h3>Ringkasan</h3>
+            <div class="mini-stat-item">
+                <div class="mini-stat-number">10,000</div>
+                <div class="mini-stat-label">Target Tahunan</div>
+            </div>
+            <div class="mini-stat-item">
+                <div class="mini-stat-number">85%</div>
+                <div class="mini-stat-label">Pencapaian</div>
+            </div>
+            <div class="mini-stat-item">
+                <div class="mini-stat-number">+12%</div>
+                <div class="mini-stat-label">Pertumbuhan</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Weekly Chart -->
+    <div class="weekly-chart">
+        <h3>Pengunjung Minggu Ini</h3>
+        <div class="days-grid">
+            <div class="day-item">
+                <div class="day-name">Sen</div>
+                <div class="day-count">750</div>
+            </div>
+            <div class="day-item">
+                <div class="day-name">Sel</div>
+                <div class="day-count">820</div>
+            </div>
+            <div class="day-item">
+                <div class="day-name">Rab</div>
+                <div class="day-count">690</div>
+            </div>
+            <div class="day-item">
+                <div class="day-name">Kam</div>
+                <div class="day-count">910</div>
+            </div>
+            <div class="day-item">
+                <div class="day-name">Jum</div>
+                <div class="day-count">780</div>
+            </div>
+            <div class="day-item">
+                <div class="day-name">Sab</div>
+                <div class="day-count">650</div>
+            </div>
+            <div class="day-item">
+                <div class="day-name">Min</div>
+                <div class="day-count">580</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Table -->
+    <div class="data-table-container">
+        <div class="table-header">
+            <h2>Data Detail Pengunjung</h2>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>Jumlah Pengunjung</th>
+                        <th>Kategori</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2024-01-15</td>
+                        <td>850</td>
+                        <td>Mahasiswa</td>
+                        <td><span style="color: #10b981;">●</span> Aktif</td>
+                    </tr>
+                    <tr>
+                        <td>2024-01-14</td>
+                        <td>720</td>
+                        <td>Umum</td>
+                        <td><span style="color: #10b981;">●</span> Aktif</td>
+                    </tr>
+                    <tr>
+                        <td>2024-01-13</td>
+                        <td>690</td>
+                        <td>Mahasiswa</td>
+                        <td><span style="color: #10b981;">●</span> Aktif</td>
+                    </tr>
+                    <tr>
+                        <td>2024-01-12</td>
+                        <td>910</td>
+                        <td>Dosen</td>
+                        <td><span style="color: #10b981;">●</span> Aktif</td>
+                    </tr>
+                    <tr>
+                        <td>2024-01-11</td>
+                        <td>780</td>
+                        <td>Mahasiswa</td>
+                        <td><span style="color: #10b981;">●</span> Aktif</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/dashboard.js') }}"></script>
+@endsection

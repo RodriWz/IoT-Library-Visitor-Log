@@ -5,25 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page - Library Medical Faculty</title>
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
     {{-- Tambahkan style khusus untuk slideshow --}}
     <style>
         .slide1 {
-            background-image: url("{{ asset('img/library1.jpg') }}");
+            background-image: url("{{ asset('img/img1.jpg') }}");
         }
 
         .slide2 {
-            background-image: url("{{ asset('img/library2.jpg') }}");
+            background-image: url("{{ asset('img/img2.jpg') }}");
         }
 
         .slide3 {
-            background-image: url("{{ asset('img/library3.jpg') }}");
+            background-image: url("{{ asset('img/img3.jpg') }}");
         }
 
         .slide4 {
-            background-image: url("{{ asset('img/library4.jpg') }}");
+            background-image: url("{{ asset('img/img4.jpg') }}");
         }
     </style>
 </head>
@@ -43,7 +43,7 @@
         <!-- Bagian Kanan Form -->
         <div class="login-form">
             <div class="form-header">
-                <img src="{{ asset('logo/logo.png') }}" alt="Logo Unhas" class="logo">
+                <img src="{{ asset('icon/logo.png') }}" alt="Logo Unhas" class="logo">
                 <div class="header-text">
                     <h2>Library Medical Faculty of</h2>
                     <h2>Hasanuddin University</h2>

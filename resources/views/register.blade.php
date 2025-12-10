@@ -8,10 +8,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
     <style>
-        .slide1 { background-image: url("{{ asset('img/library1.jpg') }}"); }
-        .slide2 { background-image: url("{{ asset('img/library2.jpg') }}"); }
-        .slide3 { background-image: url("{{ asset('img/library3.jpg') }}"); }
-        .slide4 { background-image: url("{{ asset('img/library4.jpg') }}"); }
+        .slide1 { background-image: url("{{ asset('img/img1.jpg') }}"); }
+        .slide2 { background-image: url("{{ asset('img/img2.jpg') }}"); }
+        .slide3 { background-image: url("{{ asset('img/img3.jpg') }}"); }
+        .slide4 { background-image: url("{{ asset('img/img4.jpg') }}"); }
     </style>
 </head>
 <body>
@@ -29,7 +29,7 @@
         <!-- Form -->
         <div class="login-form">
             <div class="form-header">
-                <img src="{{ asset('logo/logo.png') }}" alt="Logo Unhas" class="logo">
+                <img src="{{ asset('icon/logo.png') }}" alt="Logo Unhas" class="logo">
                 <div class="header-text">
                     <h2>Library Medical Faculty of</h2>
                     <h2>Hasanuddin University</h2>
