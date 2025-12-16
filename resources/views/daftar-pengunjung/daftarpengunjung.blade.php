@@ -51,7 +51,7 @@
         </div>
     </div>
 
-    @include('modals.modals')
+    @include('daftar-pengunjung.modals.modals')
 
 @endsection
 

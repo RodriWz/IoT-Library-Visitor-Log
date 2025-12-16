@@ -18,7 +18,7 @@ class LaporanController extends Controller
         $data  = $this->getLaporan($periode, $tahun);
         $total = $this->getTotal($tahun);
 
-        return view('laporan', compact('data', 'total', 'periode', 'tahun'));
+        return view('laporan-pengunjung.laporan', compact('data', 'total', 'periode', 'tahun'));
     }
 
     public function export(Request $request, $tipe)
@@ -30,11 +30,11 @@ class LaporanController extends Controller
         $total = $this->getTotal($tahun);
 
         if ($tipe == 'pdf') {
-            $pdf = Pdf::loadView('laporan_pdf', [
-                'data' => $data,
-                'total' => $total,
+            $pdf = Pdf::loadView('laporan-pengunjung.laporan_pdf', [
+                'data'    => $data,
+                'total'   => $total,
                 'periode' => $periode,
-                'tahun' => $tahun
+                'tahun'   => $tahun
             ])->setPaper('A4', 'portrait');
 
             return $pdf->download("laporan_pengunjung_{$periode}_{$tahun}.pdf");
@@ -49,10 +49,10 @@ class LaporanController extends Controller
 
         return back()->with('error', 'Format export tidak valid');
     }
+
     private function getLaporan($periode, $tahun)
     {
-        $query = DB::table('pengunjungs')
-            ->whereYear('created_at', $tahun);
+        $query = DB::table('pengunjungs')->whereYear('created_at', $tahun);
 
         if ($periode === 'harian') {
             return $query
@@ -65,8 +65,6 @@ class LaporanController extends Controller
                 ->get();
         }
 
-
-        // BULANAN
         if ($periode === 'bulanan') {
             return $query
                 ->select(
@@ -79,7 +77,6 @@ class LaporanController extends Controller
                 ->get();
         }
 
-        // TAHUNAN
         if ($periode === 'tahunan') {
             return $query
                 ->select(
@@ -94,10 +91,6 @@ class LaporanController extends Controller
         return collect();
     }
 
-
-    /* ============================================================
-       FUNGSI TOTAL (HARUS TERPISAH)
-       ============================================================ */
     private function getTotal($tahun)
     {
         return DB::table('pengunjungs')

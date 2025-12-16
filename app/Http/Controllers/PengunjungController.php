@@ -9,16 +9,13 @@ class PengunjungController extends Controller
 {
     public function index()
     {
-        // Ambil data pengunjung, urut berdasarkan terbaru
         $pengunjungs = Pengunjung::orderBy('created_at', 'desc')->get();
-        
-        return view('daftarpengunjung', compact('pengunjungs'));
+        return view('daftar-pengunjung.daftarpengunjung', compact('pengunjungs'));
     }
 
     public function create()
     {
-        // Gunakan view terbaru yang kamu pakai (local version)
-        return view('formpengunjung');
+        return view('form-pengunjung.formpengunjung');
     }
 
     public function store(Request $request)
@@ -49,14 +46,13 @@ class PengunjungController extends Controller
                                    ->count();
         $totalVisitors = Pengunjung::count();
 
-        // Data untuk chart - 7 hari terakhir
         $dailyVisitors = Pengunjung::selectRaw('DATE(created_at) as date, COUNT(*) as count')
             ->where('created_at', '>=', now()->subDays(7))
             ->groupBy('date')
             ->orderBy('date', 'asc')
             ->get();
 
-        return view('dashboard', compact(
+        return view('dashboard.dashboard', compact(
             'todayVisitors',
             'monthVisitors',
             'totalVisitors',

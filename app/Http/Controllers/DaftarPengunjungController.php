@@ -11,12 +11,13 @@ class DaftarPengunjungController extends Controller
     public function index()
     {
         $pengunjungs = Pengunjung::orderBy('created_at', 'desc')->get();
-        return view('daftarpengunjung', compact('pengunjungs'));
+
+        // UPDATE path view karena file sudah dipindahkan folder
+        return view('daftar-pengunjung.daftarpengunjung', compact('pengunjungs'));
     }
 
     public function update(Request $request, $id)
     {
-        // Debug info - PAKAI Log:: BUKAN \Log::
         Log::info("Update request for ID: $id", $request->all());
 
         try {
@@ -30,7 +31,6 @@ class DaftarPengunjungController extends Controller
                 ], 404);
             }
 
-            // Update data
             $pengunjung->update([
                 'nama' => $request->nama,
                 'nim' => $request->nim,

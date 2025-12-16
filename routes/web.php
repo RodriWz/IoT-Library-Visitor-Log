@@ -90,4 +90,7 @@ Route::middleware('auth')->group(function () {
     // GET FOTO USER (AJAX)
     Route::get('/get-user-photo', [SettingController::class, 'getUserPhoto'])
         ->name('get.user.photo');
+
+    // Route Chart Data untuk AJAX
+    Route::get('/dashboard/chart-data', [DashboardController::class, 'getChartData'])->name('dashboard.chart-data');
 });
