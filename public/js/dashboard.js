@@ -1,7 +1,3 @@
-// ===== DASHBOARD JAVASCRIPT - CLEAN VERSION =====
-// Medical Library - Hasanuddin University
-// Version: 3.0
-
 document.addEventListener('DOMContentLoaded', function() {
     initializeCharts();
     initializeEventListeners();
