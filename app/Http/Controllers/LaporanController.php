@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\LaporanExport;
+use App\Models\Pengunjung;
 
 class LaporanController extends Controller
 {
@@ -21,38 +22,10 @@ class LaporanController extends Controller
         return view('laporan-pengunjung.laporan', compact('data', 'total', 'periode', 'tahun'));
     }
 
-    public function export(Request $request, $tipe)
-    {
-        $periode = $request->get('periode', 'harian');
-        $tahun   = $request->get('tahun', date('Y'));
-
-        $data  = $this->getLaporan($periode, $tahun);
-        $total = $this->getTotal($tahun);
-
-        if ($tipe == 'pdf') {
-            $pdf = Pdf::loadView('laporan-pengunjung.laporan_pdf', [
-                'data'    => $data,
-                'total'   => $total,
-                'periode' => $periode,
-                'tahun'   => $tahun
-            ])->setPaper('A4', 'portrait');
-
-            return $pdf->download("laporan_pengunjung_{$periode}_{$tahun}.pdf");
-        }
-
-        if ($tipe == 'xls') {
-            return Excel::download(
-                new LaporanExport($data, $total, $periode, $tahun),
-                "laporan_pengunjung_{$periode}_{$tahun}.xlsx"
-            );
-        }
-
-        return back()->with('error', 'Format export tidak valid');
-    }
-
     private function getLaporan($periode, $tahun)
     {
-        $query = DB::table('pengunjungs')->whereYear('created_at', $tahun);
+        // GANTI 'pengunjungs' MENJADI 'visitors'
+        $query = DB::table('visitors')->whereYear('created_at', $tahun);
 
         if ($periode === 'harian') {
             return $query
@@ -72,19 +45,8 @@ class LaporanController extends Controller
                     DB::raw('MONTHNAME(created_at) as nama_bulan'),
                     DB::raw('COUNT(*) as jumlah')
                 )
-                ->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m")'))
+                ->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m")'), DB::raw('MONTHNAME(created_at)'))
                 ->orderByRaw('DATE_FORMAT(created_at, "%Y-%m") ASC')
-                ->get();
-        }
-
-        if ($periode === 'tahunan') {
-            return $query
-                ->select(
-                    DB::raw('YEAR(created_at) as tahun'),
-                    DB::raw('COUNT(*) as jumlah')
-                )
-                ->groupBy(DB::raw('YEAR(created_at)'))
-                ->orderByRaw('YEAR(created_at) ASC')
                 ->get();
         }
 
@@ -93,7 +55,8 @@ class LaporanController extends Controller
 
     private function getTotal($tahun)
     {
-        return DB::table('pengunjungs')
+        // GANTI 'pengunjungs' MENJADI 'visitors'
+        return DB::table('visitors')
             ->whereYear('created_at', $tahun)
             ->count();
     }

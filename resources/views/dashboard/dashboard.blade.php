@@ -57,9 +57,9 @@
             <div class="chart-header">
                 <h2><i class="fas fa-chart-line"></i> Tren Pengunjung 7 Hari Terakhir</h2>
                 <div class="chart-period">
-                    <button class="period-btn active" data-period="week">Minggu</button>
-                    <button class="period-btn" data-period="month">Bulan</button>
-                    <button class="period-btn" data-period="year">Tahun</button>
+                    <button class="period-btn active" data-period="week">Hari</button>
+                    <button class="period-btn" data-period="month">Minggu</button>
+                    <button class="period-btn" data-period="year">Bulan</button>
                 </div>
             </div>
             <canvas id="dailyChart"></canvas>

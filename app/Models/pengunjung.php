@@ -9,14 +9,8 @@ class Pengunjung extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'nama',
-        'nim', 
-        'prodi',
-        'tujuan'
-        // created_at dan updated_at otomatis ada
-    ];
+    // Paksa menggunakan tabel visitors
+    protected $table = 'visitors';
 
-    // Tidak perlu menambahkan apa-apa untuk created_at
-    // Laravel otomatis handle timestamps
+    protected $guarded = [];
 }

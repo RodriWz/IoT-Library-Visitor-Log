@@ -1,26 +1,19 @@
-/* ===== MEDICAL LIBRARY DASHBOARD - ACADEMIC PROFESSIONAL STYLE ===== */
-
-/* ===== VARIABEL & RESET ===== */
 :root {
-    /* Warna Maroon Bertingkat - Dari Gelap ke Terang */
-    --maroon-900: #4A0404;      /* Maroon Sangat Gelap */
-    --maroon-800: #6B0505;      /* Maroon Gelap */
-    --maroon-700: #8B0000;      /* Dark Red (Base) */
-    --maroon-600: #A52A2A;      /* Brown Maroon */
-    --maroon-500: #B22222;      /* Fire Brick */
-    --maroon-400: #CD5C5C;      /* Indian Red */
-    --maroon-300: #DC143C;      /* Crimson */
-    --maroon-200: #F08080;      /* Light Coral */
-    --maroon-100: #FFB6C1;      /* Light Pink */
-    --maroon-50: #FFF5F5;       /* Snow (Sangat Terang) */
-    
-    /* Primary Color Assignment */
+    --maroon-900: #4A0404;      
+    --maroon-800: #6B0505;      
+    --maroon-700: #8B0000;      
+    --maroon-600: #A52A2A;      
+    --maroon-500: #B22222;      
+    --maroon-400: #CD5C5C;      
+    --maroon-300: #DC143C;      
+    --maroon-200: #F08080;      
+    --maroon-100: #FFB6C1;      
+    --maroon-50: #FFF5F5;       
     --primary-color: var(--maroon-700);
     --primary-dark: var(--maroon-800);
     --primary-light: var(--maroon-600);
     --primary-bg: var(--maroon-50);
     
-    /* Warna Pendukung */
     --secondary-color: #2C3E50;
     --accent-gold: #C9B037;
     --success-color: #27AE60;
@@ -28,7 +21,6 @@
     --danger-color: var(--maroon-600);
     --info-color: var(--maroon-500);
     
-    /* Grayscale */
     --text-primary: #2C3E50;
     --text-secondary: #5A6C7D;
     --text-muted: #95A5A6;

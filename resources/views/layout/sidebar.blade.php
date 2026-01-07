@@ -41,44 +41,43 @@
         </ul>
     </nav>
 
-    <!-- User Info Section dengan Foto Profil -->
     <div class="user-info">
-        <div class="user-avatar">
+        <div class="user-avatar" id="sidebarAvatarContainer">
             @if(auth()->user()->foto)
-                <!-- BENAR: -->
-                <img src="{{ asset('uploads/profile/' . auth()->user()->foto) }}" alt="Profile" class="user-profile-img"
-                    id="sidebarProfileImg">
+                <img src="{{ asset('uploads/profile/' . auth()->user()->foto) }}" 
+                     alt="Profile" 
+                     class="user-profile-img"
+                     id="sidebarProfileImg">
             @else
-                <div class="default-avatar">
+                <div class="default-avatar" id="sidebarDefaultAvatar">
                     <i class="fas fa-user-md"></i>
                 </div>
             @endif
         </div>
         <div class="user-details">
-            <div class="user-name">{{ auth()->user()->name ?? 'Admin Library' }}</div>
+            <div class="user-name" id="sidebarUserName">{{ auth()->user()->name ?? 'Admin Library' }}</div>
             <div class="user-role">Medical Faculty</div>
         </div>
     </div>
 
     <div class="sidebar-footer">
-    <ul class="sidebar-menu">
-        <li>
-            <a href="#" onclick="openPengaturan()">
-                <i class="fas fa-cog"></i>
-                <span>Pengaturan</span>
-            </a>
-        </li>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="javascript:void(0)" onclick="openPengaturan()">
+                    <i class="fas fa-cog"></i>
+                    <span>Pengaturan</span>
+                </a>
+            </li>
 
-        <li>
-            <form id="logout-form" action="/logout" method="POST" style="display: none;">
-                @csrf
-            </form>
-            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <i class="fas fa-sign-out-alt"></i>
-                <span>Keluar</span>
-            </a>
-        </li>
-    </ul>
-</div>
-
+            <li>
+                <form id="logout-form" action="/logout" method="POST" style="display: none;">
+                    @csrf
+                </form>
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Keluar</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </aside>
