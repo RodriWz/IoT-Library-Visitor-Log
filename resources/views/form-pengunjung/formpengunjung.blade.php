@@ -9,15 +9,7 @@
 @endpush
 
 @section('content')
-    @if (session('success'))
-    <div class="alert-success" id="success-alert">
-        <div class="alert-icon">✔</div>
-        <div class="alert-text">
-            <strong>Berhasil!</strong> {{ session('success') }}
-        </div>
-        <button class="alert-close" onclick="closeAlert()">×</button>
-    </div>
-    @endif
+    {{-- Notifikasi dihapus dari sini karena sudah ada di layout utama (melayang) --}}
 
     <div class="form-container">
         <div class="add-icon">

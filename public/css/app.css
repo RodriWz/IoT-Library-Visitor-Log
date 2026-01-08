@@ -442,82 +442,50 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(49, 130, 206, 0.3);
 }
-
-/* ===================== NOTIFICATION STYLES ===================== */
-.simple-notification {
+/* Container Utama - Mengunci posisi agar tidak menggeser form */
+.toast-container {
     position: fixed;
-    top: 20px;
-    right: 20px;
-    background: white;
-    padding: 15px 20px;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    border-left: 4px solid;
-    z-index: 10000;
-    transform: translateX(400px);
-    transition: transform 0.3s ease;
-    min-width: 300px;
-    max-width: 400px;
-}
-
-.simple-notification.show {
-    transform: translateX(0);
-}
-
-.notification-success {
-    border-left-color: #38a169;
-    background: #f0fff4;
-}
-
-.notification-error {
-    border-left-color: #e53e3e;
-    background: #fff5f5;
-}
-
-.notification-content {
+    top: 25px;
+    right: 25px;
+    z-index: 99999; /* Sangat tinggi agar di atas sidebar/modal */
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 10px;
+    pointer-events: none;
 }
 
-.notification-icon {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
+.toast-notification {
+    pointer-events: auto; /* Agar tombol bisa diklik */
+    background: white;
+    min-width: 320px;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-left: 6px solid #2ECC71;
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    color: white;
-    flex-shrink: 0;
+    transition: all 0.3s ease;
+    animation: slideInToast 0.4s ease-out;
 }
 
-.notification-success .notification-icon {
-    background: #38a169;
+.toast-notification.error {
+    border-left-color: #e74c3c;
 }
 
-.notification-error .notification-icon {
-    background: #e53e3e;
+.toast-content { display: flex; align-items: center; width: 100%; }
+.toast-body { margin: 0 12px; flex-grow: 1; }
+.toast-title { display: block; font-weight: 700; color: #2d3748; font-size: 14px; }
+.toast-msg { color: #718096; font-size: 13px; }
+.toast-close { background: none; border: none; font-size: 20px; cursor: pointer; color: #a0aec0; }
+
+@keyframes slideInToast {
+    from { transform: translateX(120%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
 }
 
-.notification-text {
-    flex: 1;
-    font-size: 14px;
-    color: #2d3748;
-}
-
-.notification-close {
-    background: none;
-    border: none;
-    font-size: 16px;
-    color: #718096;
-    cursor: pointer;
-    padding: 0;
-    margin-left: 10px;
-}
-
-.notification-close:hover {
-    color: #2d3748;
+.toast-notification.hiding {
+    transform: translateX(120%);
+    opacity: 0;
 }
 
 /* ===================== RESPONSIVE DESIGN ===================== */

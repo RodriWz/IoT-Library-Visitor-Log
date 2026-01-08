@@ -1,6 +1,8 @@
 @extends('layout.app')
 
 @section('title', 'Laporan Pengunjung')
+@section('header-title', 'Laporan Pengunjung')
+@section('header-subtitle', 'Laporan Pengunjung Perpustakaan')
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/laporan.css') }}?v=1.0">

@@ -21,6 +21,34 @@
 
 <body>
 
+    <div class="toast-container">
+        @if(session('success'))
+            <div class="toast-notification success">
+                <div class="toast-content">
+                    <div class="toast-icon">✅</div>
+                    <div class="toast-body">
+                        <span class="toast-title">Berhasil!</span>
+                        <span class="toast-msg">{{ session('success') }}</span>
+                    </div>
+                    <button type="button" class="toast-close" onclick="closeThisAlert(this)">&times;</button>
+                </div>
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="toast-notification error">
+                <div class="toast-content">
+                    <div class="toast-icon">❌</div>
+                    <div class="toast-body">
+                        <span class="toast-title">Gagal!</span>
+                        <span class="toast-msg">{{ session('error') }}</span>
+                    </div>
+                    <button type="button" class="toast-close" onclick="closeThisAlert(this)">&times;</button>
+                </div>
+            </div>
+        @endif
+    </div>
+
     {{-- SIDEBAR --}}
     @include('layout.sidebar')
 
@@ -34,23 +62,39 @@
         @yield('content')
     </main>
 
-    {{-- ========================= --}}
-    {{-- MODAL PENGATURAN DITARUH DI SINI --}}
-    {{-- ========================= --}}
+    {{-- MODAL PENGATURAN --}}
     <div id="pengaturanContainer">
         @include('pengaturan.modals.settings')
     </div>
 
-    {{-- ========================= --}}
     {{-- LIBRARY EXTERNAL --}}
-    {{-- ========================= --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    {{-- ========================= --}}
     {{-- JAVASCRIPT UTAMA --}}
-    {{-- ========================= --}}
     <script src="{{ asset('js/modal-pengaturan.js') }}"></script>
     <script src="{{ asset('js/profile.js') }}"></script>
+
+    <script>
+        // Fungsi untuk menutup notifikasi secara manual
+        function closeThisAlert(btn) {
+            const alert = btn.closest('.toast-notification');
+            if (alert) {
+                alert.classList.add('hiding');
+                setTimeout(() => alert.remove(), 300);
+            }
+        }
+
+        // Otomatis tutup semua notifikasi setelah 5 detik
+        document.addEventListener('DOMContentLoaded', function () {
+            const alerts = document.querySelectorAll('.toast-notification');
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    alert.classList.add('hiding');
+                    setTimeout(() => alert.remove(), 300);
+                }, 5000);
+            });
+        });
+    </script>
 
     @stack('scripts')
 

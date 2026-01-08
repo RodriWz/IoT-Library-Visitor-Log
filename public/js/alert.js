@@ -1,17 +1,12 @@
 @section('scripts')
 <script>
 function closeAlert() {
-    const alert = document.getElementById('success-alert');
-    if (alert) {
-        // Tambahkan class hiding untuk trigger animation
-        alert.classList.add('hiding');
-        
-        // Hapus element setelah animation selesai
-        setTimeout(() => {
-            if (alert.parentNode) {
-                alert.parentNode.removeChild(alert);
-            }
-        }, 300); // Match dengan duration transition CSS
+    console.log("Tombol X ditekan!"); // Cek di F12 Console
+    alert("Fungsi berjalan!");        // Munculkan popup browser biasa
+    
+    const alertBox = document.getElementById('success-alert');
+    if (alertBox) {
+        alertBox.remove();
     }
 }
 

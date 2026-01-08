@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\File;
 
 class SettingController extends Controller
 {
-    /**
-     * Tampilkan data user ke modal/halaman pengaturan
-     */
     public function index()
     {
         $user = Auth::user();
@@ -44,7 +41,7 @@ class SettingController extends Controller
             if ($request->hasFile('foto')) {
                 $file = $request->file('foto');
                 $filename = 'profile_' . $user->id . '_' . time() . '.' . $file->getClientOriginalExtension();
-                
+
                 $uploadPath = public_path('uploads/profile');
                 if (!File::isDirectory($uploadPath)) {
                     File::makeDirectory($uploadPath, 0755, true);
@@ -66,12 +63,11 @@ class SettingController extends Controller
                     'success' => true,
                     'message' => 'Profil berhasil diperbarui.',
                     'nama'    => $user->name,
-                    'foto_url'=> asset('uploads/profile/' . $user->foto)
+                    'foto_url' => asset('uploads/profile/' . $user->foto)
                 ]);
             }
 
             return back()->with('success', 'Profil berhasil diperbarui.');
-
         } catch (\Exception $e) {
             return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
@@ -84,11 +80,12 @@ class SettingController extends Controller
     {
         $request->validate([
             'password_lama' => 'required',
-            'password_baru' => 'required|min:6|confirmed',
+            // Gunakan 'same:password_konfirmasi' sebagai pengganti 'confirmed'
+            'password_baru' => 'required|min:6|same:password_konfirmasi',
         ], [
             'password_lama.required' => 'Password lama wajib diisi.',
             'password_baru.min'      => 'Password baru minimal 6 karakter.',
-            'password_baru.confirmed'=> 'Konfirmasi password tidak cocok.',
+            'password_baru.same'     => 'Konfirmasi password tidak cocok.', // Pesan custom
         ]);
 
         $user = User::find(Auth::id());
@@ -102,27 +99,7 @@ class SettingController extends Controller
         $user->password = Hash::make($request->password_baru);
         $user->save();
 
+        // Mengirim session 'success' ke halaman sebelumnya
         return back()->with('success', 'Password berhasil diganti.');
-    }
-
-    /**
-     * Hapus Foto Profil (Reset ke default)
-     */
-    public function deleteProfile()
-    {
-        try {
-            $user = User::find(Auth::id());
-
-            if ($user->foto && File::exists(public_path('uploads/profile/' . $user->foto))) {
-                File::delete(public_path('uploads/profile/' . $user->foto));
-            }
-
-            $user->foto = null;
-            $user->save();
-
-            return back()->with('success', 'Foto profil telah dihapus.');
-        } catch (\Exception $e) {
-            return back()->with('error', 'Gagal menghapus foto.');
-        }
     }
 }
