@@ -50,6 +50,16 @@ class LaporanController extends Controller
                 ->get();
         }
 
+        if ($periode === 'tahunan') {
+            return $query
+                ->select(
+                    DB::raw('YEAR(created_at) as tahun'), // Ganti alias menjadi 'tahun'
+                    DB::raw('COUNT(*) as jumlah')
+                )
+                ->groupBy(DB::raw('YEAR(created_at)'))
+                ->get();
+        }
+
         return collect();
     }
 
