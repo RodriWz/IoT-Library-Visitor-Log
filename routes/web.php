@@ -56,7 +56,7 @@ Route::middleware('auth')->group(function () {
 
     // LAPORAN
     Route::get('/laporanpengunjung', [LaporanController::class, 'index'])->name('laporanpengunjung');
-    Route::get('/laporan/export/{tipe}', [LaporanController::class, 'export'])->name('laporan.export');
+    Route::get('/laporan/export', [LaporanController::class, 'export'])->name('laporan.export');
 
     /*
     |--------------------------------------------------------------------------
@@ -71,21 +71,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/pengaturan/update-profile', [SettingController::class, 'updateProfile'])
         ->name('pengaturan.update.profile');
 
-    // HAPUS / RESET FOTO PROFIL
-    Route::post('/pengaturan/reset-foto', [SettingController::class, 'deleteProfile'])
-        ->name('pengaturan.reset.foto');
-
     // UPDATE PASSWORD MANUAL
     Route::post('/pengaturan/update-password', [SettingController::class, 'updatePassword'])
         ->name('pengaturan.update.password');
-
-    // RESET PASSWORD DEFAULT (opsional)
-    Route::post('/pengaturan/reset-password', [SettingController::class, 'resetPassword'])
-        ->name('pengaturan.reset.password');
-
-    // RESET SEMUA PENGATURAN
-    Route::post('/pengaturan/reset-semua', [SettingController::class, 'resetSemua'])
-        ->name('pengaturan.reset.semua');
 
     // GET FOTO USER (AJAX)
     Route::get('/get-user-photo', [SettingController::class, 'getUserPhoto'])

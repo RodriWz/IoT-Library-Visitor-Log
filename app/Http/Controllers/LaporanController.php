@@ -60,4 +60,25 @@ class LaporanController extends Controller
             ->whereYear('created_at', $tahun)
             ->count();
     }
+
+    public function export(Request $request)
+    {
+        // Ambil data dari request
+        $periode = $request->get('periode', 'harian');
+        $tahun   = $request->get('tahun', date('Y'));
+        $format  = $request->get('format'); // Menangkap 'pdf' atau 'xls' dari JS tadi
+
+        $data  = $this->getLaporan($periode, $tahun);
+        $total = $this->getTotal($tahun);
+
+        // LOGIKA PERCABANGAN
+        if ($format === 'xls' || $format === 'excel') {
+            // Pastikan Anda menggunakan return agar script PDF di bawah tidak tereksekusi
+            return Excel::download(new LaporanExport($data, $total, $periode, $tahun), "laporan-pengunjung-{$tahun}.xlsx");
+        }
+
+        // Default: Jika bukan XLS, maka generate PDF
+        $pdf = Pdf::loadView('laporan-pengunjung.laporan_pdf', compact('data', 'total', 'periode', 'tahun'));
+        return $pdf->download("laporan-pengunjung-{$tahun}.pdf");
+    }
 }

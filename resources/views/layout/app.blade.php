@@ -21,7 +21,8 @@
 
 <body>
 
-    <div class="toast-container">
+   <div class="toast-container">
+        {{-- 1. Notifikasi Sukses --}}
         @if(session('success'))
             <div class="toast-notification success">
                 <div class="toast-content">
@@ -35,6 +36,7 @@
             </div>
         @endif
 
+        {{-- 2. Notifikasi Error General --}}
         @if(session('error'))
             <div class="toast-notification error">
                 <div class="toast-content">
@@ -46,6 +48,22 @@
                     <button type="button" class="toast-close" onclick="closeThisAlert(this)">&times;</button>
                 </div>
             </div>
+        @endif
+
+        {{-- 3. Notifikasi Error Validasi (PENTING: Agar error foto masuk sini) --}}
+        @if($errors->any())
+            @foreach($errors->all() as $error)
+                <div class="toast-notification error">
+                    <div class="toast-content">
+                        <div class="toast-icon">⚠️</div>
+                        <div class="toast-body">
+                            <span class="toast-title">Kesalahan Input!</span>
+                            <span class="toast-msg">{{ $error }}</span>
+                        </div>
+                        <button type="button" class="toast-close" onclick="closeThisAlert(this)">&times;</button>
+                    </div>
+                </div>
+            @endforeach
         @endif
     </div>
 
@@ -94,6 +112,13 @@
                 }, 5000);
             });
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+        // Jika ada error validasi, otomatis buka modal agar user tahu kesalahannya
+        @if($errors->any())
+            openPengaturan();
+        @endif
+    });
     </script>
 
     @stack('scripts')

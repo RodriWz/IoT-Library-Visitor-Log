@@ -126,13 +126,14 @@
 @endsection
 
 @push('scripts')
-<script>
-    document.getElementById('btnExport').addEventListener('click', function () {
-        const tipe = document.getElementById('exportType').value;
-        const tahun = document.getElementById('tahun').value;
-        const periode = document.getElementById('periode').value;
+    <script>
+        document.getElementById('btnExport').addEventListener('click', function () {
+            const tipe = document.getElementById('exportType').value; // 'pdf' atau 'xls'
+            const tahun = document.getElementById('tahun').value;
+            const periode = document.getElementById('periode').value;
 
-        window.location.href = `/laporan/export/${tipe}?tahun=${tahun}&periode=${periode}`;
-    });
-</script>
+            // Kita gunakan parameter query '?format=' agar seragam dengan Controller
+            window.location.href = `/laporan/export?format=${tipe}&tahun=${tahun}&periode=${periode}`;
+        });
+    </script>
 @endpush

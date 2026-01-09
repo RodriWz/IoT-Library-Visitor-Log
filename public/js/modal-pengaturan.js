@@ -1,32 +1,11 @@
-/**
- * ==========================================
- * MODAL PENGATURAN AKUN - JAVASCRIPT LENGKAP
- * ==========================================
- */
-
-const ModalState = {
-    isOpen: false,
-    activeTab: 'profile'
-};
-
-function switchTab(tabName) {
-    if (!tabName) return;
-    const selectedTab = document.getElementById('tab-' + tabName);
-    if (!selectedTab) return;
-    
-    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-    document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
-    
-    setTimeout(() => { selectedTab.classList.add('active'); }, 50);
-    if (event && event.currentTarget) event.currentTarget.classList.add('active');
-    ModalState.activeTab = tabName;
-}
+// State untuk melacak status modal
+const ModalState = { isOpen: false };
 
 function openPengaturan() {
     const modal = document.getElementById('pengaturanModal');
     const backdrop = document.getElementById('pengaturanBackdrop');
-    if (!modal || !backdrop || ModalState.isOpen) return;
-    
+    if (!modal || !backdrop) return;
+
     backdrop.classList.add('show');
     modal.classList.add('show');
     document.body.style.overflow = 'hidden';
@@ -36,69 +15,67 @@ function openPengaturan() {
 function closePengaturan() {
     const modal = document.getElementById('pengaturanModal');
     const backdrop = document.getElementById('pengaturanBackdrop');
-    if (!modal || !backdrop || !ModalState.isOpen) return;
-    
+    if (!modal || !backdrop) return;
+
     modal.classList.remove('show');
     backdrop.classList.remove('show');
-    setTimeout(() => { document.body.style.overflow = ''; }, 300);
+    document.body.style.overflow = '';
     ModalState.isOpen = false;
 }
 
 /**
- * Initialize modal & Real-time Sync
+ * FUNGSI SWITCH TAB (Perbaikan Utama)
+ * Mengontrol perpindahan antar tab Profil, Password, dan Info
  */
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // 1. SYNC NAMA KE SIDEBAR
-    // Pastikan input di modal memiliki atribut name="name"
-    const inputNama = document.querySelector('input[name="name"]'); 
-    const namaSidebar = document.getElementById('sidebarUserName'); 
+function switchTab(tabName) {
+    // 1. Sembunyikan semua konten tab
+    document.querySelectorAll('#pengaturanModal .tab-content').forEach(content => {
+        content.classList.remove('active');
+    });
 
-    if (inputNama && namaSidebar) {
-        inputNama.addEventListener('input', function() {
-            namaSidebar.textContent = this.value || 'Admin Library';
-        });
+    // 2. Nonaktifkan semua tombol navigasi tab
+    document.querySelectorAll('#pengaturanModal .modal-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+
+    // 3. Tampilkan konten yang dipilih (ID: tab-profile, tab-password, dsb)
+    const targetContent = document.getElementById('tab-' + tabName);
+    if (targetContent) {
+        targetContent.classList.add('active');
     }
 
-    // 2. SYNC FOTO KE SIDEBAR
-    const fotoInput = document.querySelector('input[type="file"]#foto-input, input[type="file"][name="foto"]');
-    const fotoSidebar = document.getElementById('sidebarProfileImg');
+    // 4. Tambahkan class active pada tombol yang diklik
+    if (event && event.currentTarget) {
+        event.currentTarget.classList.add('active');
+    }
+}
 
-    if (fotoInput) {
+document.addEventListener('DOMContentLoaded', function() {
+    // Preview Foto Profil
+    const fotoInput = document.querySelector('input[name="foto"]');
+    const previewImg = document.getElementById('modalPreviewImg');
+
+    if (fotoInput && previewImg) {
         fotoInput.addEventListener('change', function(e) {
             const file = e.target.files[0];
-            if (file && file.type.startsWith('image/')) {
+            if (file) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
-                    // Update preview di modal
-                    const previewModal = document.querySelector('.foto-preview img');
-                    if (previewModal) previewModal.src = e.target.result;
-
-                    // Update foto di sidebar
-                    if (fotoSidebar) {
-                        fotoSidebar.src = e.target.result;
-                    } else {
-                        // Jika sebelumnya default avatar (icon), refresh halaman mungkin diperlukan 
-                        // atau buat elemen img baru secara dinamis di sini.
-                    }
-                };
+                reader.onload = (e) => previewImg.src = e.target.result;
                 reader.readAsDataURL(file);
             }
         });
     }
 
-    // 3. Modal Listeners (Backdrop & Esc)
+    // Tutup modal saat klik backdrop
     const backdrop = document.getElementById('pengaturanBackdrop');
     if (backdrop) {
-        backdrop.addEventListener('click', (e) => { if (e.target === backdrop) closePengaturan(); });
+        backdrop.addEventListener('click', (e) => {
+            if (e.target === backdrop) closePengaturan();
+        });
     }
-    document.addEventListener('keydown', (e) => {
-        if ((e.key === 'Escape' || e.key === 'Esc') && ModalState.isOpen) closePengaturan();
-    });
 });
 
-window.ModalPengaturan = {
-    open: openPengaturan,
-    close: closePengaturan,
-    switchTab: switchTab
-};
+// Ekspos fungsi ke global agar onclick di HTML berjalan
+window.openPengaturan = openPengaturan;
+window.closePengaturan = closePengaturan;
+window.switchTab = switchTab;
