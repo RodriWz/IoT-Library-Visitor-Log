@@ -27,7 +27,6 @@ Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login.auth');
 
 // ===== OTP RESET PASSWORD (TANPA LOGIN) =====
-// ===== OTP RESET PASSWORD (TAMU) =====
 Route::get('/forgot-password', [OtpResetPasswordController::class, 'showEmailForm'])
     ->name('otp.email.form');
 

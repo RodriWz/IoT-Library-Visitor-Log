@@ -1,5 +1,3 @@
-@section('scripts')
-<script>
 function closeAlert() {
     console.log("Tombol X ditekan!"); // Cek di F12 Console
     alert("Fungsi berjalan!");        // Munculkan popup browser biasa
@@ -34,5 +32,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-</script>
-@endsection
