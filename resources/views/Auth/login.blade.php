@@ -76,7 +76,7 @@
             </form>
 
             <div class="form-links">
-                <a href="#" class="forgot-password">Lupa Password?</a>
+                <a href="{{ route('otp.email.form') }}">Lupa Password?</a>
                 <a href="{{ route('register') }}" class="signup-link">Belum Punya akun?</a>
             </div>
 

@@ -8,11 +8,12 @@ use App\Http\Controllers\PengunjungController;
 use App\Http\Controllers\DaftarPengunjungController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\OtpResetPasswordController;
 
 /*
-|--------------------------------------------------------------------------
-| Rute untuk Tamu (Guest)
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------- 
+| RUTE TAMU (BELUM LOGIN)
+|-------------------------------------------------------------------------- 
 */
 
 Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -25,60 +26,49 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login.auth');
 
-// RESET PASSWORD TANPA LOGIN
-Route::post('/reset-password/send-code', [SettingController::class, 'sendResetCode'])
-    ->name('reset.send.code');
+// ===== OTP RESET PASSWORD (TANPA LOGIN) =====
+// ===== OTP RESET PASSWORD (TAMU) =====
+Route::get('/forgot-password', [OtpResetPasswordController::class, 'showEmailForm'])
+    ->name('otp.email.form');
 
-Route::post('/reset-password/reset', [SettingController::class, 'resetPassword'])
-    ->name('reset.password');
+Route::post('/forgot-password', [OtpResetPasswordController::class, 'sendOtp'])
+    ->name('otp.send');
+
+Route::get('/reset-password-otp', [OtpResetPasswordController::class, 'showResetForm'])
+    ->name('otp.reset.form');
+
+Route::post('/reset-password-otp', [OtpResetPasswordController::class, 'resetPassword'])
+    ->name('otp.reset');
+
+
 
 /*
-|--------------------------------------------------------------------------
-| Rute Setelah Login (AUTH)
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------- 
+| RUTE SETELAH LOGIN
+|-------------------------------------------------------------------------- 
 */
 Route::middleware('auth')->group(function () {
 
-    // LOGOUT
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-    // DASHBOARD
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // FORM PENGUNJUNG
     Route::get('/formpengunjung', [PengunjungController::class, 'create'])->name('formpengunjung');
     Route::post('/formpengunjung', [PengunjungController::class, 'store'])->name('pengunjung.store');
 
-    // DAFTAR PENGUNJUNG
     Route::get('/daftarpengunjung', [DaftarPengunjungController::class, 'index'])->name('daftarpengunjung');
     Route::post('/pengunjung/{id}/update', [DaftarPengunjungController::class, 'update'])->name('pengunjung.update');
     Route::post('/pengunjung/{id}/delete', [DaftarPengunjungController::class, 'destroy'])->name('pengunjung.delete');
 
-    // LAPORAN
     Route::get('/laporanpengunjung', [LaporanController::class, 'index'])->name('laporanpengunjung');
     Route::get('/laporan/export', [LaporanController::class, 'export'])->name('laporan.export');
 
-    /*
-    |--------------------------------------------------------------------------
-    | PENGATURAN / SETTINGS
-    |--------------------------------------------------------------------------
-    */
-
-    // HALAMAN PENGATURAN
+    // PENGATURAN
     Route::get('/pengaturan', [SettingController::class, 'index'])->name('pengaturan');
+    Route::post('/pengaturan/update-profile', [SettingController::class, 'updateProfile'])->name('pengaturan.update.profile');
+    Route::post('/pengaturan/update-password', [SettingController::class, 'updatePassword'])->name('pengaturan.update.password');
 
-    // UPDATE FOTO PROFIL
-    Route::post('/pengaturan/update-profile', [SettingController::class, 'updateProfile'])
-        ->name('pengaturan.update.profile');
+    Route::get('/get-user-photo', [SettingController::class, 'getUserPhoto'])->name('get.user.photo');
 
-    // UPDATE PASSWORD MANUAL
-    Route::post('/pengaturan/update-password', [SettingController::class, 'updatePassword'])
-        ->name('pengaturan.update.password');
-
-    // GET FOTO USER (AJAX)
-    Route::get('/get-user-photo', [SettingController::class, 'getUserPhoto'])
-        ->name('get.user.photo');
-
-    // Route Chart Data untuk AJAX
     Route::get('/dashboard/chart-data', [DashboardController::class, 'getChartData'])->name('dashboard.chart-data');
 });
